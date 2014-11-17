@@ -9,5 +9,3 @@ describe('GET /entries', function(){
       .expect(200, done);
   });
 });
-
-testApi

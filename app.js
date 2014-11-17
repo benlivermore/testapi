@@ -57,14 +57,14 @@ app.put('/entries/:id', function (request, response) {
 
 
 app.delete('/entries/:id', function(request, response) {
-	var message = "NOT UPDATED"
+	var message = "NOT UPDATED";
 	EntryModel.find({_id: request.params.id}).remove(function (err) {
 		if(!err) {
-			message = response.send("REMOVED")
+			message = response.send("REMOVED");
 		} else {
-			message = response.send("ERROR")
+			message = response.send("ERROR");
 		}
 	});
-})
+});
 
 module.exports = app;
