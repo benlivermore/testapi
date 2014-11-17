@@ -16,6 +16,7 @@
     "mocha": "2.0.*",
     "should": "4.3.*",
     "supertest": "0.15.*",
+    "mockgoose": "1.10.*",
     "jshint": "2.5.*"
   }
 }
