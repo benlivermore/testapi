@@ -1,6 +1,5 @@
 var app = require('./app'),
-	port = 3000;
+	port = 3000,
+	mongoPath = 'mongodb://localhost/test';
 
-app.listen( port, function() {
-    console.log( 'Express server listening on port %d in %s mode', port, app.settings.env );
-});
+app.start(mongoPath, port);

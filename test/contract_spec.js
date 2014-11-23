@@ -4,7 +4,8 @@ var request = require('supertest'),
 
 describe('GET /entries', function(){
   it('respond with 200', function(done){
-    request(testApi)
+
+    request(testApi.start('mongodb://localhost/test', 3000))
       .get('/entries')
       .expect(200, done);
   });
