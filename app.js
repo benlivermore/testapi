@@ -18,6 +18,9 @@ testapi = {
     		console.log( 'Express server listening on port %d in %s mode', port, app.settings.env );
 		});
 		return app;
+	},
+	end: function (mongoPath) {
+		mongoose.connection.close();
 	}
 
 };
