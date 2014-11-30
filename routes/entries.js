@@ -31,8 +31,8 @@ function handlePost(request, response) {
 }
 
 function handlePut (request, response) {
-	EntryModel.update({_id: request.params.id}, {$set:{body:request.body.entry}}, function (err) {
-		return response.send("UPDATED");
+	EntryModel.findByIdAndUpdate(request.params.id, {body:request.body.entry}, function (err, entry) {
+		return response.send(entry);
 	});
 }
 
@@ -41,9 +41,9 @@ function handleDelete(request, response) {
 	var message = "NOT UPDATED";
 	EntryModel.find({_id: request.params.id}).remove(function (err) {
 		if(!err) {
-			message = response.send("REMOVED");
+			response.send({_id: request.params.id});
 		} else {
-			message = response.send("ERROR");
+			response.send({id:"ERROR"});
 		}
 	});
 }

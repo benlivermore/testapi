@@ -60,3 +60,55 @@ describe('POST /entries', function(){
       	
   });
 });
+
+describe('PUT /entries', function(){
+  it('respond with 200', function(done){
+
+  	request(app)
+      	.post('/entries/')
+      	.send({entry:'pre post for put'})
+      	.end(function (err, response) {
+      		var id = response.body._id;
+
+      		request(app)
+		      	.put('/entries/' + id)
+		      	.send({entry:'test put'})
+		      	.expect(200)
+		      	.end(function (err, response) {
+		      		if(err) {
+		      			return done(err);
+		      		}
+
+		      		expect(response.body.createdDate).to.be.ok;
+		      		expect(response.body.body).to.equal("test put");
+		      		done();
+		      	});
+      	});
+      	
+  });
+});
+
+
+describe('DELETE /entries', function(){
+  it('respond with 200', function(done){
+
+  	request(app)
+      	.post('/entries/')
+      	.send({entry:'pre post for put'})
+      	.end(function (err, response) {
+      		var id = response.body._id;
+
+      		request(app)
+		      	.del('/entries/' + id)
+		      	.expect(200)
+		      	.end(function (err, response) {
+		      		if(err) {
+		      			return done(err);
+		      		}
+		      		expect(response.body._id).to.equal(id);
+		      		done();
+		      	});
+      	});
+      	
+  });
+});
