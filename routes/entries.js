@@ -22,9 +22,9 @@ function handlePost(request, response) {
 	postedEntry.save(function (err) {
 		if (!err) {
 			console.log('saved!');
-			return response.send( postedEntry );
+			return response.json( postedEntry );
 		} else {
-			return response.send("ERROR");
+			return response.json({error:"problem"});
 		}
 	});
 
@@ -38,7 +38,7 @@ function handlePut (request, response) {
 				return response.send(entry);
 			} else {
 				response.status(404);
-				response.send({error:"there was no such id to update"});
+				response.json({error:"there was no such id to update"});
 			}
 		} else {
 			response.send({error:"problem"});
@@ -52,13 +52,13 @@ function handleDelete(request, response) {
 	EntryModel.find({_id: request.params.id}).remove(function (err, numDeleted) {
 		if(!err) {
 			if(numDeleted) {
-				response.send({_id: request.params.id});
+				response.json({_id: request.params.id});
 			} else {
 				response.status(404);
-				response.send({error:"could not find to delete"});
+				response.json({error:"could not find to delete"});
 			}
 		} else {
-			response.send({error:"problem"});
+			response.json({error:"problem"});
 		}
 	});
 }
