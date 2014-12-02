@@ -32,18 +32,33 @@ function handlePost(request, response) {
 
 function handlePut (request, response) {
 	EntryModel.findByIdAndUpdate(request.params.id, {body:request.body.entry}, function (err, entry) {
-		return response.send(entry);
+		if(!err) {
+
+			if(entry) {
+				return response.send(entry);
+			} else {
+				response.status(404);
+				response.send({error:"there was no such id to update"});
+			}
+		} else {
+			response.send({error:"problem"});
+		}
 	});
 }
 
 
 function handleDelete(request, response) {
 	var message = "NOT UPDATED";
-	EntryModel.find({_id: request.params.id}).remove(function (err) {
+	EntryModel.find({_id: request.params.id}).remove(function (err, numDeleted) {
 		if(!err) {
-			response.send({_id: request.params.id});
+			if(numDeleted) {
+				response.send({_id: request.params.id});
+			} else {
+				response.status(404);
+				response.send({error:"could not find to delete"});
+			}
 		} else {
-			response.send({id:"ERROR"});
+			response.send({error:"problem"});
 		}
 	});
 }

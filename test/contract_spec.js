@@ -41,6 +41,15 @@ describe('GET /entries', function(){
   });
 });
 
+
+describe('When the page does not exist', function(){
+  it('respond with 404', function(done){
+    request(app)
+      .get('/nothing')
+      .expect(404, done);
+  });
+});
+
 describe('POST /entries', function(){
   it('respond with 200', function(done){
   	request(app)
@@ -86,6 +95,14 @@ describe('PUT /entries', function(){
       	});
       	
   });
+
+  it('responds with 404', function (done) {
+  	var nonExistingId = '547233f856d9f103d2256b10';
+  	request(app)
+  	.put('/entries/' + nonExistingId)
+  	.send({entry:'test put'})
+  	.expect(404, done);
+  });
 });
 
 
@@ -109,6 +126,14 @@ describe('DELETE /entries', function(){
 		      		done();
 		      	});
       	});
+      	
+  });
+
+  it('respond with 404', function(done){
+  	var nonExistingId = '547233f856d9f103d2256b10';
+  	request(app)
+  	.del('/entries/' + nonExistingId)
+  	.expect(404, done);
       	
   });
 });
