@@ -1,6 +1,7 @@
 var express = require('express'),
 	EntryModel = require('../entryModel'),
-	getEntries = require('./getEntries');
+	getEntries = require('./getEntries'),
+	isValidMongoId = require('mongoose').Types.ObjectId.isValid;
 
 var entryRouter = express.Router();
 
@@ -31,7 +32,13 @@ function handlePost(request, response) {
 }
 
 function handlePut (request, response) {
-	EntryModel.findByIdAndUpdate(request.params.id, {body:request.body.entry}, function (err, entry) {
+	var id = request.params.id;
+	if(!isValidMongoId(id)) {
+		response.status(404);
+		return response.json({error:"there was no such id to update"});
+	}
+
+	EntryModel.findByIdAndUpdate(id, {body:request.body.entry}, function (err, entry) {
 		if(!err) {
 
 			if(entry) {
@@ -40,16 +47,22 @@ function handlePut (request, response) {
 				response.status(404);
 				response.json({error:"there was no such id to update"});
 			}
+
 		} else {
-			response.send({error:"problem"});
+
+			response.json({error:"problem"});
 		}
 	});
 }
 
 
 function handleDelete(request, response) {
-	var message = "NOT UPDATED";
-	EntryModel.find({_id: request.params.id}).remove(function (err, numDeleted) {
+	var id = request.params.id;
+	if(!isValidMongoId(id)) {
+		response.status(404);
+		return response.json({error:"there was no such id to update"});
+	}
+	EntryModel.find({_id: id}).remove(function (err, numDeleted) {
 		if(!err) {
 			if(numDeleted) {
 				response.json({_id: request.params.id});

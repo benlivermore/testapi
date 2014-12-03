@@ -103,6 +103,14 @@ describe('PUT /entries', function(){
   	.send({entry:'test put'})
   	.expect(404, done);
   });
+
+  it('responds with 404 when objectId is invalid', function (done) {
+  	var nonValidId = 'notvalid';
+  	request(app)
+  	.put('/entries/' + nonValidId)
+  	.send({entry:'test put'})
+  	.expect(404, done);
+  });
 });
 
 
@@ -133,6 +141,14 @@ describe('DELETE /entries', function(){
   	var nonExistingId = '547233f856d9f103d2256b10';
   	request(app)
   	.del('/entries/' + nonExistingId)
+  	.expect(404, done);
+      	
+  });
+
+  it('respond with 404 with invalid id', function(done){
+  	var notValidId = 'notValid';
+  	request(app)
+  	.del('/entries/' + notValidId)
   	.expect(404, done);
       	
   });
