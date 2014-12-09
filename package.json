@@ -13,9 +13,6 @@
     "body-parser": "~1.8.1",
     "mongodb": "*",
     "mongoose": "*",
-    "q": "1.1.*",
-    "glob": "4.3.1",
-    "multi-glob": "0.4.*",
     "mocha": "2.0.*",
     "should": "4.3.*",
     "chai": "1.1.*",
@@ -23,7 +20,6 @@
     "mockgoose": "1.10.*",
     "rewire": "2.1.*",
     "proxyquire": "1.1.*",
-    "jshint": "2.5.*",
-    "js-beautify":"1.5.*"
+    "jshint": "2.5.*"
   }
 }
