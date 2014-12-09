@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./src/server",
     "test": "mocha",
-    "pretest": "jshint ."
+    "pretest": "node ./beautify.js; jshint ."
   },
 
   "dependencies": {
@@ -21,6 +21,7 @@
     "mockgoose": "1.10.*",
     "rewire": "2.1.*",
     "proxyquire": "1.1.*",
-    "jshint": "2.5.*"
+    "jshint": "2.5.*",
+    "beautify-z": "0.0.1"
   }
 }
