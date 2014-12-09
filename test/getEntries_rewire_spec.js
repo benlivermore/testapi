@@ -1,6 +1,6 @@
 var rewire = require('rewire');
 var should = require("should");
-var getEntries = rewire('../routes/getEntries');
+var getEntries = rewire('../src/routes/getEntries');
 
 describe('getEntries with rewire', function() {
     it('should send an error when there is one', function() {

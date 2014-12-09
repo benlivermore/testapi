@@ -1,6 +1,6 @@
 /*jshint expr: true*/
 var request = require('supertest'),
-    testApi = require('../app'),
+    testApi = require('../src/app'),
     expect = require("chai").expect,
     MongoClient = require('mongodb').MongoClient,
     app = testApi.start('mongodb://localhost/test', 3000),

@@ -6,7 +6,7 @@ var mockEntryModel = {
     }
 };
 
-var getEntries = proxyquire('../routes/getEntries', {
+var getEntries = proxyquire('../src/routes/getEntries', {
     "../entryModel": mockEntryModel
 });
 
